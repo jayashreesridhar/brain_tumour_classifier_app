@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 5px;
+}
+</style>
+<meta charset="UTF-8">
+<title>Brain Tumour Classifier</title>
+<h1 style="color:green;"align='center';"background-color:DodgerBlue";>Brain Tumour Classifier</h1>
+<img src="{{url_for('static', filename='brainTumor_image.jpg')}}" align="right" width="328" height="328"/>
+<h3 style="color:green;" align='left'>What is a Brain Tumor?</h3>
+<p>A brain tumor is a cluster of abnormal cells that grows out of control in your brain. Some brain tumors are benign, which means the cells aren’t cancer. Others are malignant, meaning they’re cancer.
+
+Brain tumors are called primary tumors if they started in your brain. They’re considered secondary if they started somewhere else in your body and spread to your brain.
+
+</p>
+<h3 style="color:green;" align='left'>Types of Brain Tumors</h3>
+<p>Primary brain tumors come from cells that make up the brain and central nervous system. They’re named for the kind of cell in which they first form. There are more than 100 kinds of brain tumors. The most common types in adults are:</p>
+<table>
+<tr>
+<th>Tumour Type</th>
+<th>Part of Origin</th>
+<th>Is Cancerous?</th>
+</tr>
+<tr>
+<td>Glioblastoma</td>
+<td>Glial Cells</td>
+<td align="center">&#10004;</td>
+</tr>
+<tr>
+<td>Meningiomas</td>
+<td>Meninges</td>
+<td align="center">&#10006;</td>
+</tr>
+<tr>
+<td>Schwannomas</td>
+<td>Schwann cells</td>
+<td align="center">&#10006;</td>
+</tr>
+<tr>
+<td>Pituitary adenomas</td>
+<td>Pituitary Gland</td>
+<td align="center">&#10006;</td>
+</tr>
+</table>
+</head>
+<body>
+<h3 style="color:green;" align='left'>About the Classifier</h3>
+<p>Please upload the brain scan image with jpg or png file extension with the file size not exceeding 5 MB. The application will classify tumour and non-tumour images with 96 % accuracy.<br>
+<b style="color:green;" align='left'>Please select a brain scan image to upload</b></br>
+<b>
+	{% with messages = get_flashed_messages() %}
+	  {% if messages %}
+         {{ messages[0] }}
+        
+	  {% endif %}
+	{% endwith %}
+</b>	
+</p>
+<form method="post" action="/" enctype="multipart/form-data">
+    <dl>
+	<p>
+		<input type="file" name="file" autocomplete="off" required>
+	</p>
+    </dl>
+    <p>
+	<input type="submit" value="Submit">
+    </p>
+</form>
+</body>
+</html>
