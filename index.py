@@ -25,7 +25,7 @@ def index():
 
 @app.route('/', methods=['GET','POST'])
 def submit_file():
-    if request.method == 'POST':
+    #if request.method == 'POST':
         if 'file' not in request.files:
             flash('No file part')
             return redirect(request.url)
