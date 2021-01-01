@@ -5,7 +5,7 @@ Created on Sat Dec 19 13:28:47 2020
 
 @author: jayashree
 """
-
+from __future__ import print_function 
 from flask import render_template, request, redirect, flash
 
 
@@ -13,7 +13,9 @@ from app import app
 from werkzeug.utils import secure_filename
 from main import getPrediction
 import os
-#import time
+import time
+
+import sys
 #from werkzeug.serving import run_simple
 
 @app.route('/')
@@ -39,10 +41,10 @@ def submit_file():
             if file_stats.st_size > 5000000:
                 flash('Please upload file with size less than 5MB')
                 return redirect(request.url)
-            #tic = time.perf_counter()
+            tic = time.perf_counter()
             label= getPrediction(filename)
-            #toc = time.perf_counter()
-            #print(f"Time taken for prediction {toc - tic:0.4f} seconds")
+            toc = time.perf_counter()
+            print(f"Time taken for prediction {toc - tic:0.4f} seconds", file=sys.stderr)
             
             if(label):
                 flash("The Scan Image "+filename+" has brain tumour")
