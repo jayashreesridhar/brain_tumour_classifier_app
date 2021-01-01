@@ -14,7 +14,7 @@ from werkzeug.utils import secure_filename
 from main import getPrediction
 import os
 #import time
-from werkzeug.serving import run_simple
+#from werkzeug.serving import run_simple
 
 @app.route('/')
 def index():
@@ -48,10 +48,10 @@ def submit_file():
                 flash("The Scan Image "+filename+" has brain tumour")
             else:
                 flash("The Scan Image "+filename+" doesn't have brain tumour")
-            return redirect('/')
+            return redirect(request.url)
 
 
 if __name__ == "__main__":
-    run_simple('0.0.0.0', 5000, app, use_reloader=True)
+    app.run('0.0.0.0')
     
     

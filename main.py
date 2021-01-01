@@ -5,8 +5,7 @@ Created on Sat Dec 19 20:06:21 2020
 
 @author: jayashree
 """
-import os
-os.environ["CUDA_VISIBLE_DEVICES"]="-1" 
+
 import tensorflow as tf #open source library for numerical computation that makes machine learning faster and easier.
 
 from tensorflow.keras.preprocessing.image import load_img
@@ -14,7 +13,12 @@ from tensorflow.keras.preprocessing.image import img_to_array
 from app import app
 model=tf.keras.models.load_model(str(app.config['MODEL_PATH']))
 
+# Set CPU as available physical device
+my_devices = tf.config.experimental.list_physical_devices(device_type='CPU')
+tf.config.experimental.set_visible_devices(devices= my_devices, device_type='CPU')
 
+# To find out which devices your operations and tensors are assigned to
+tf.debugging.set_log_device_placement(True)
 def getPrediction(filename):
 
     
