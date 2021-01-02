@@ -1,4 +1,4 @@
 ﻿flask
 gunicorn
-tensorflow
+tensorflow-cpu
 pillow
