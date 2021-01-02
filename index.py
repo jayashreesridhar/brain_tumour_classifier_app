@@ -26,7 +26,7 @@ def index():
 @app.route('/', methods=['GET','POST'])
 #def index():
 def submit_file():
-    global model
+    
     if request.method == 'POST':
         if 'file' not in request.files:
             flash('No file part')
@@ -47,6 +47,7 @@ def submit_file():
                 return redirect(request.url)
                 #return render_template('index.html')
             tic = time.perf_counter()
+            global model
             label= getPrediction(filename,model)
             toc = time.perf_counter()
             print(f"Time taken for prediction {toc - tic:0.4f} seconds", file=sys.stderr)
