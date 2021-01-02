@@ -26,6 +26,7 @@ def index():
 @app.route('/', methods=['GET','POST'])
 #def index():
 def submit_file():
+    global model
     if request.method == 'POST':
         if 'file' not in request.files:
             flash('No file part')
