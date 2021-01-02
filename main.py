@@ -6,13 +6,13 @@ Created on Sat Dec 19 20:06:21 2020
 @author: jayashree
 """
 from __future__ import print_function 
-#import tensorflow as tf #open source library for numerical computation that makes machine learning faster and easier.
+import tensorflow as tf #open source library for numerical computation that makes machine learning faster and easier.
 
 from tensorflow.keras.preprocessing.image import load_img
 from tensorflow.keras.preprocessing.image import img_to_array
 from app import app
 import sys
-from flask import g
+
 
 
 
@@ -27,13 +27,13 @@ from flask import g
 #tf.debugging.set_log_device_placement(True)
 def getPrediction(filename):
     
-    #model=tf.keras.models.load_model(str(app.config['MODEL_PATH']))
+    model=tf.keras.models.load_model(str(app.config['MODEL_PATH']))
     print("inside prediction before model loading", file=sys.stderr)
     image = load_img(str(app.config['UPLOAD_PATH'])+'/'+filename, target_size=(350, 350))
     image = img_to_array(image)
     image = image.reshape((1, image.shape[0], image.shape[1], image.shape[2]))
     print("after model loading and before predict", file=sys.stderr)
-    pred_prob = app.config['MODEL'].predict(image)
+    pred_prob = model.predict(image)
     print("after predict", file=sys.stderr)
     pred_bool = (pred_prob >= 0.5).item()
    

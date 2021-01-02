@@ -20,5 +20,5 @@ app.config['UPLOAD_EXTENSIONS'] = ['.jpg', '.png', '.gif']
 app.config['SECRET_KEY'] = '89765'
 app.config['UPLOAD_PATH'] = pathlib.Path(__file__).parent / 'files_upload'
 app.config['MODEL_PATH'] = pathlib.Path(__file__).parent / 'my_model/'
-app.config['MODEL']=tf.keras.models.load_model(str(app.config['MODEL_PATH']))
+#tf.keras.models.load_model(str(app.config['MODEL_PATH']))
 #toolbar = DebugToolbarExtension(app)
