@@ -49,19 +49,32 @@ Brain tumors are called primary tumors if they started in your brain. They’re 
 <td align="center">&#10006;</td>
 </tr>
 </table>
+ <script>
+             function imageShow(){
+                    document.getElementById('image').style.display = "block";       
+                    }
+        </script>
+        <style>
+      blink {
+        color: #1c87c9;
+        font-size: 15px;
+        font-weight: bold;
+        font-family: sans-serif;
+      }
+    </style>
 </head>
 <body>
 <h3 style="color:green;" align='left'>About the Classifier</h3>
 <p>Please upload the brain scan image with jpg or png file extension with the file size not exceeding 5 MB. The application will classify tumour and non-tumour images with 96 % accuracy.<br>
 <b style="color:green;" align='left'>Please select a brain scan image to upload</b></br>
-<b>
+<b><blink>
 	{% with messages = get_flashed_messages() %}
 	  {% if messages %}
          {{ messages[0] }}
         
 	  {% endif %}
 	{% endwith %}
-</b>	
+</blink></b>	
 </p>
 <form method="post" action="/" enctype="multipart/form-data">
     <dl>
@@ -70,8 +83,15 @@ Brain tumors are called primary tumors if they started in your brain. They’re 
 	</p>
     </dl>
     <p>
-	<input type="submit" value="Submit">
-    </p>
+	<input type="submit"  value="Submit">
+
+   
+    
+         
+       <button type="button" onclick="window.open('{{url_for('static', filename='accuracy_loss_curve.png')}}','targetWindow', 'toolbar=no, location=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1090px, height=550px, top=25px left=120px'); return false;">Visualize Accuracy Loss Curve</button> 
+<button type="button" onclick="window.open('{{url_for('static', filename='model_visualization.png')}}','targetWindow', 'toolbar=no, location=no, status=no, menubar=no, scrollbars=yes, resizable=yes, width=1090px, height=550px, top=25px left=120px'); return false;">Model Visualization</button> 
+   </p>    
 </form>
+
 </body>
 </html>
