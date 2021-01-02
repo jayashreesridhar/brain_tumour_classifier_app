@@ -8,7 +8,7 @@ Created on Sat Dec 19 13:28:47 2020
 from __future__ import print_function 
 from flask import render_template, request, redirect, flash
 
-
+import tensorflow as tf
 from app import app
 from werkzeug.utils import secure_filename
 from main import getPrediction
@@ -46,7 +46,7 @@ def submit_file():
                 return redirect(request.url)
                 #return render_template('index.html')
             tic = time.perf_counter()
-            label= getPrediction(filename)
+            label= getPrediction(filename,model)
             toc = time.perf_counter()
             print(f"Time taken for prediction {toc - tic:0.4f} seconds", file=sys.stderr)
             
@@ -60,6 +60,7 @@ def submit_file():
 
 
 if __name__ == "__main__":
+    model=tf.keras.models.load_model(str(app.config['MODEL_PATH']))
     app.run('0.0.0.0')
     
     
