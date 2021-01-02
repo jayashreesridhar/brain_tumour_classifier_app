@@ -18,24 +18,24 @@ import time
 import sys
 #from werkzeug.serving import run_simple
 
-#@app.route('/')
-#def index():
-    #return render_template('index.html')
+@app.route('/')
+def index():
+    return render_template('index.html')
 
 
 @app.route('/', methods=['GET','POST'])
-def index():
-#def submit_file():
+#def index():
+def submit_file():
     if request.method == 'POST':
         if 'file' not in request.files:
             flash('No file part')
-            #return redirect(request.url)
-            return render_template('index.html')
+            return redirect(request.url)
+            #return render_template('index.html')
         file = request.files['file']
         if file.filename == '':
             flash('No file selected for uploading')
-            #return redirect(request.url)
-            return render_template('index.html')
+            return redirect(request.url)
+            #return render_template('index.html')
         
         if file:
             filename = secure_filename(file.filename)
@@ -43,8 +43,8 @@ def index():
             file_stats = os.stat(str(app.config['UPLOAD_PATH'])+'/'+filename)
             if file_stats.st_size > 5000000:
                 flash('Please upload file with size less than 5MB')
-                #return redirect(request.url)
-                return render_template('index.html')
+                return redirect(request.url)
+                #return render_template('index.html')
             tic = time.perf_counter()
             label= getPrediction(filename)
             toc = time.perf_counter()
@@ -54,8 +54,8 @@ def index():
                 flash("The Scan Image "+filename+" has brain tumour")
             else:
                 flash("The Scan Image "+filename+" doesn't have brain tumour")
-            #return redirect(request.url)
-            return render_template('index.html')
+            return redirect(request.url)
+            #return render_template('index.html')
     return render_template('index.html')
 
 
